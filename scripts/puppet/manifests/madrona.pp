@@ -1,3 +1,9 @@
+$dbname = "madrona"
+$projectname = "madrona"
+$reponame = "madrona-devops"
+$appname = "mad_app"
+$secretkey = "secret"
+
 # ensure that apt update is run before any packages are installed
 class apt {
   exec { "apt-update":
@@ -117,28 +123,28 @@ class { "postgresql::server": version => "9.1",
     shared_buffers => '24MB',
 }
 
-postgresql::database { "forestplanner":
+postgresql::database { $dbname:
   owner => "vagrant",
 }
 
 exec { "load postgis":
-  command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql -d forestplanner",
+  command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql -d ${dbname}",
   user => "vagrant",
-  require => Postgresql::Database['forestplanner']
+  require => Postgresql::Database['${dbname}']
 }
 
 exec { "load spatialrefs":
-  command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql -d forestplanner",
+  command => "/usr/bin/psql -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql -d ${dbname}",
   user => "vagrant",
-  require => Postgresql::Database['forestplanner']
+  require => Postgresql::Database['${dbname}']
 }
 
-python::venv::isolate { "/usr/local/venv/lot":
+python::venv::isolate { "/usr/local/venv/${projectname}":
   subscribe => [Package['python-mapnik'], Package['build-essential']]
 }
 
 file { "settings_local.py":
-  path => "/vagrant/lot/settings_local.py",
+  path => "/vagrant/${projectname}/settings_local.py",
   content => template("settings_vagrant.py")
 }
 

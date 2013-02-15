@@ -1,15 +1,15 @@
-SECRET_KEY = 'secret'
+SECRET_KEY = '<%= secretkey %>'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'forestplanner',
+        'NAME': '<%= dbname%>',
         'USER': 'vagrant',
     }
 }
 
 # This should be a local folder created for use with the install_media command 
-MEDIA_ROOT = '/usr/local/apps/land_owner_tools/mediaroot/'
+MEDIA_ROOT = '/usr/local/apps/<%= reponame%>/mediaroot/'
 MEDIA_URL = 'http://localhost:8000/media/'
 STATIC_URL = 'http://localhost:8000/media/'
 
@@ -24,4 +24,4 @@ ADMINS = (
 import logging
 logging.getLogger('django.db.backends').setLevel(logging.ERROR)
 import os
-LOG_FILE = os.path.join(os.path.dirname(__file__),'..','trees.log')
+LOG_FILE = os.path.join(os.path.dirname(__file__),'..','<%= appname%>.log')
