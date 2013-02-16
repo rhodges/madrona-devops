@@ -3,10 +3,8 @@
 ```
 vagrant box add madrona-11.10-amd64 madrona-11.10-amd64.box
 vagrant init madrona-11.10-amd64
-
 --OR--
 Copy these files to the same directory that houses your Madrona project
-
 ```
 
 # Settings
@@ -18,7 +16,8 @@ In Vagrantfile, if launching Madrona demo
 # Running 
 
 ```
-vagrant up
+vagrant up 
+
 fab dev init
 ```*
 
