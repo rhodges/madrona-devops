@@ -17,10 +17,10 @@ In Vagrantfile, if launching Madrona demo
 
 # Running 
 
-``vagrant up``
-``fab dev init``*
+```vagrant up
+fab dev init```*
 
-*Requires you to install Fabric
+*Fab command requires you to install Fabric
 
 ## Caveats
 
