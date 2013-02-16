@@ -18,9 +18,9 @@ In Vagrantfile, if launching Madrona demo
 ```
 vagrant up 
 fab dev init
-``` *
+``` 
 
-*Fab command requires you to install Fabric
+*Fab command requires that you to install Fabric
 
 ## Caveats
 
